@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Playlist</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Music title</a>
+      <a href="/my-playlist">Playlist</a>
+    </nav>
+    <div id="content">
+      <h1>Your playlist</h1>
+      <ul>
+        <!-- boucle pour afficher tous les titres ajoutés au tableau myPlaylist + requête GET pour supprimer le titre de son choix -->
+        <% for (var i = 0; i < myPlaylist.length; i++) { %>
+        <li><a href="/delete-title?position=<%=i%>"><img class="picto" src="/images/remove.svg"> <%= myPlaylist[i].title %> - <%= myPlaylist[i].artist %> - <%= myPlaylist[i].year %></a></li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>

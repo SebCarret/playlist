@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/"><img class="picto" src="/images/music.svg"> Music title</a>
+      <a href="/my-playlist"><img class="picto" src="/images/playlist.svg"> Playlist</a>
+    </nav>
+    <div id="content">
+      <h1>Make your choice</h1>
+      <div id="filter">
+        <!-- filtres par type de musique (requêtes GET) -->
+          <img class="picto" src="/images/filter.svg">
+          <a href="/filter?type=pop">pop</a>
+          <a href="/filter?type=rock">rock</a>
+          <a href="/filter?type=RnB">R&B</a>
+      </div>
+      <div id="sort">
+        <!-- tri croissant/décroissant des titres par date dynamisé avec la variable onSortClick (true/false) -->
+        <a href="/sort?type=<%=onSortClick%>">Date <img class="picto" src="/images/sort.svg"></a>
+      </div>
+      <ul>
+        <!-- boucle pour afficher tous les titres du tableau musicList + requête GET pour ajouter un titre à sa playlist -->
+        <% for (var i = 0; i < musicList.length; i++) { %>
+        <li><a href="/add-title?title=<%= musicList[i].title %>&artist=<%= musicList[i].artist %>&year=<%= musicList[i].year %>"><img class="picto" src="/images/add.svg"><%= musicList[i].title %> - <%= musicList[i].artist %> - <%= musicList[i].year %></a></li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>
