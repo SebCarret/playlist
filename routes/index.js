@@ -14,11 +14,14 @@ var musicList = [
   {type: 'R&B', title: 'Shut up', artist:'The Black Eyed Peas' , year: 2009 }
 ];
 
+// initialisation d'une variable globale utilisée pour le filtre des styles de musiques
+var musicFilter;
 // initialisation d'une variable globale à false pour le tri croissant/décroissant des titres
 var onSortClick = false;
 
 // route de la page d'accueil
 router.get('/', function(req, res, next) {
+  musicFilter = null;
   if (req.session.myPlaylist === undefined) {
     req.session.myPlaylist = []
   }
@@ -48,7 +51,7 @@ router.get('/delete-title', function(req, res, next) {
 
 // route utilisée pour filtrer la musique par type (méthode filter)
 router.get('/filter', function(req, res, next) {
-  var musicFilter;
+
   if (req.query.type === 'pop') {
     musicFilter = musicList.filter(music => music.type === 'pop');
   } else if (req.query.type === 'rock') {
@@ -59,17 +62,22 @@ router.get('/filter', function(req, res, next) {
   res.render('index', {musicList: musicFilter, onSortClick})
 });
 
-// route utilisée pour le tri croissant/décroissant des titres par date (méthode sort)
+// route utilisée pour le tri croissant/décroissant des titres par date (méthode sort )
 router.get('/sort', function(req, res, next) {
 
   onSortClick = !onSortClick;
   var musicSortList;
 
-  if (onSortClick) {
-    musicSortList = musicList.sort((a, b) => a.year - b.year)
+  if (musicFilter === null){
+    onSortClick
+    ? musicSortList = musicList.sort((a, b) => a.year - b.year)
+    :musicSortList = musicList.sort((a, b) => b.year - a.year)
   } else {
-    musicSortList = musicList.sort((a, b) => b.year - a.year);
-  }
+    onSortClick
+    ? musicSortList = musicFilter.sort((a, b) => a.year - b.year)
+    : musicSortList = musicFilter.sort((a, b) => b.year - a.year)
+  };
+
   res.render('index', {musicList: musicSortList, onSortClick})
 });
 
