@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
   if (req.session.myPlaylist === undefined) {
     req.session.myPlaylist = []
   }
-  res.render('index', {musicList, onSortClick});
+  res.render('index', {musicList});
 });
 
 // route de la playlist
@@ -59,7 +59,7 @@ router.get('/filter', function(req, res, next) {
   } else if (req.query.type === 'RnB') {
     musicFilter = musicList.filter(music => music.type === 'R&B');
   };
-  res.render('index', {musicList: musicFilter, onSortClick})
+  res.render('index', {musicList: musicFilter})
 });
 
 // route utilisée pour le tri croissant/décroissant des titres par date (méthode sort )
@@ -78,7 +78,7 @@ router.get('/sort', function(req, res, next) {
     : musicSortList = musicFilter.sort((a, b) => b.year - a.year)
   };
 
-  res.render('index', {musicList: musicSortList, onSortClick})
+  res.render('index', {musicList: musicSortList})
 });
 
 module.exports = router;

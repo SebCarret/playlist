@@ -13,15 +13,15 @@
     <div id="content">
       <h1>Make your choice</h1>
       <div id="filter">
-        <!-- filtres par type de musique (requêtes GET) -->
           <a href="/"><img class="picto" src="/images/filter.svg"></a>
+          <!-- filtres par type de musique (requêtes GET) -->
           <a href="/filter?type=pop">pop</a>
           <a href="/filter?type=rock">rock</a>
           <a href="/filter?type=RnB">R&B</a>
       </div>
       <div id="sort">
-        <!-- tri croissant/décroissant des titres par date dynamisé avec la variable onSortClick (true/false) -->
-        <a href="/sort?type=<%=onSortClick%>">Date <img class="picto" src="/images/sort.svg"></a>
+        <!-- tri croissant/décroissant des titres (requête GET) -->
+        <a href="/sort">Date <img class="picto" src="/images/sort.svg"></a>
       </div>
       <ul>
         <!-- boucle pour afficher tous les titres du tableau musicList + requête GET pour ajouter un titre à sa playlist -->
